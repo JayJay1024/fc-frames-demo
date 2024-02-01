@@ -68,7 +68,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                     style: {
                       color: "#00f",
                     },
-                    children: "One:" + pollData.options.length,
+                    children: pollData.options.map((opt, index) => ({
+                      type: "div",
+                      key: `11${index}`,
+                      props: {
+                        style: {
+                          backgroundColor: voted ? "#ff0083" : "",
+                          color: "#f2f3f5",
+                          padding: 10,
+                          marginBottom: 10,
+                          borderRadius: 4,
+                          width: `${voted ? opt.percentOfTotal : 100}%`,
+                          whiteSpace: "nowrap",
+                          overflow: "visible",
+                        },
+                        children: opt.text,
+                      },
+                    })),
                   },
                 },
               ],
