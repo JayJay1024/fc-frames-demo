@@ -47,12 +47,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             width: "100%",
             height: "100%",
             backgroundColor: "#f2f3f5",
-            color: "#00f",
             padding: 50,
             lineHeight: 1.2,
             fontSize: 24,
           },
-          children: "JayJay1024",
+          children: {
+            type: "div",
+            key: "11",
+            props: {
+              style: {
+                display: "flex",
+                flexDirection: "column",
+                padding: 20,
+                color: "#0f0",
+              },
+              children: "Jay Debug",
+            },
+          },
         },
       },
       {
