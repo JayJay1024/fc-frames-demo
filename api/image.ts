@@ -59,9 +59,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 display: "flex",
                 flexDirection: "column",
                 padding: 20,
-                color: "#0f0",
               },
-              children: "Jay Debug",
+              children: [
+                {
+                  type: "div",
+                  key: "111",
+                  props: {
+                    style: {
+                      color: "#00f",
+                    },
+                    children: "One",
+                  },
+                },
+              ],
             },
           },
         },
