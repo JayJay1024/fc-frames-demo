@@ -1,10 +1,10 @@
-import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { kv } from "@vercel/kv";
 import satori from "satori/wasm";
 import { join } from "path";
 import * as fs from "fs";
 import sharp from "sharp";
-import { Poll } from "./types";
+import type { Poll } from "./types";
+import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 const fontPath = join(process.cwd(), "/api/Roboto-Regular.ttf");
 const fontData = fs.readFileSync(fontPath);
