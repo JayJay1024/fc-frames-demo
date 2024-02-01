@@ -1,6 +1,4 @@
 import { kv } from "@vercel/kv";
-import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { Poll } from "./types";
 import satori from "satori/wasm";
 import { join } from "path";
 import * as fs from "fs";
@@ -9,14 +7,14 @@ import sharp from "sharp";
 const fontPath = join(process.cwd(), "Roboto-Regular.ttf");
 const fontData = fs.readFileSync(fontPath);
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req, res) {
   try {
     const pollId = req.query["id"];
     if (!pollId) {
       return res.status(400).send("Missing poll ID");
     }
 
-    const poll: Poll | null = await kv.hgetall(`poll:${pollId}`);
+    const poll = await kv.hgetall(`poll:${pollId}`);
     if (!poll) {
       return res.status(400).send(`Missing poll for #${pollId}`);
     }
