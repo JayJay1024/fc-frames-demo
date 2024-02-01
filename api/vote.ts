@@ -2,9 +2,11 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 export async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === "POST") {
-    res.status(200).end(`Haha`);
+    res.statusCode = 200;
+    return res.end("Haha");
   } else {
     res.setHeader("Allow", ["POST"]);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+    res.statusCode = 405;
+    return res.end(`Method ${req.method} Not Allowed`);
   }
 }
