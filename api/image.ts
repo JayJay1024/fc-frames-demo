@@ -61,6 +61,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 alignItems: "center",
                 width: "max-content",
                 padding: 20,
+                border: "1px solid #ff0083",
               },
               children: pollData.options.map((opt, index) => ({
                 type: "div",
