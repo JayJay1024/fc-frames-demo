@@ -94,7 +94,7 @@ export default async function handler(req, res) {
     // res.setHeader("Cache-Control", "max-age=10");
     // return res.end(pngBuffer);
 
-    return res.end("Jay");
+    return res.end("Jay Test");
   } catch (err) {
     console.error(err);
     res.statusCode = 500;
