@@ -1,5 +1,5 @@
 import { kv } from "@vercel/kv";
-import satori from "satori";
+import satori from "satori/wasm";
 import { join } from "path";
 import * as fs from "fs";
 import sharp from "sharp";
@@ -41,45 +41,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         key: "1",
         props: {
           style: {
-            justifyContent: "flex-start",
-            alignItems: "center",
-            display: "flex",
-            width: "100%",
-            height: "100%",
-            backgroundColor: "#f2f3f5",
-            padding: 50,
-            lineHeight: 1.2,
-            fontSize: 24,
+            color: "#f0f",
           },
         },
-        children: {
-          type: "div",
-          key: "11",
-          props: {
-            style: {
-              display: "flex",
-              flexDirection: "column",
-              padding: 20,
-            },
-          },
-          children: pollData.options.map((opt, index) => ({
-            type: "div",
-            key: `11${index}`,
-            props: {
-              style: {
-                backgroundColor: voted ? "#ff0083" : "",
-                color: "#f2f3f5",
-                padding: 10,
-                marginBottom: 10,
-                borderRadius: 4,
-                width: `${voted ? opt.percentOfTotal : 100}%`,
-                whiteSpace: "nowrap",
-                overflow: "visible",
-              },
-            },
-            children: opt.text,
-          })),
-        },
+        children: "Hello Jay",
       },
       {
         width: 600,
@@ -94,6 +59,66 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         ],
       }
     );
+
+    // const svg = await satori(
+    //   {
+    //     type: "div",
+    //     key: "1",
+    //     props: {
+    //       style: {
+    //         justifyContent: "flex-start",
+    //         alignItems: "center",
+    //         display: "flex",
+    //         width: "100%",
+    //         height: "100%",
+    //         backgroundColor: "#f2f3f5",
+    //         padding: 50,
+    //         lineHeight: 1.2,
+    //         fontSize: 24,
+    //       },
+    //     },
+    //     children: {
+    //       type: "div",
+    //       key: "11",
+    //       props: {
+    //         style: {
+    //           display: "flex",
+    //           flexDirection: "column",
+    //           padding: 20,
+    //         },
+    //       },
+    //       children: pollData.options.map((opt, index) => ({
+    //         type: "div",
+    //         key: `11${index}`,
+    //         props: {
+    //           style: {
+    //             backgroundColor: voted ? "#ff0083" : "",
+    //             color: "#f2f3f5",
+    //             padding: 10,
+    //             marginBottom: 10,
+    //             borderRadius: 4,
+    //             width: `${voted ? opt.percentOfTotal : 100}%`,
+    //             whiteSpace: "nowrap",
+    //             overflow: "visible",
+    //           },
+    //         },
+    //         children: opt.text,
+    //       })),
+    //     },
+    //   },
+    //   {
+    //     width: 600,
+    //     height: 400,
+    //     fonts: [
+    //       {
+    //         data: fontData,
+    //         name: "Roboto",
+    //         style: "normal",
+    //         weight: 400,
+    //       },
+    //     ],
+    //   }
+    // );
 
     // const svg = await satori(
     //   <div
