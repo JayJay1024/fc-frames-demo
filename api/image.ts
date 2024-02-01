@@ -36,47 +36,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     };
 
     const svg = await satori(
-      <div
-        style={{
-          justifyContent: "flex-start",
-          alignItems: "center",
-          display: "flex",
-          width: "100%",
-          height: "100%",
-          backgroundColor: "#f2f3f5",
-          padding: 50,
-          lineHeight: 1.2,
-          fontSize: 24,
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            padding: 20,
-          }}
-        >
-          {pollData.options.map((opt, index) => {
-            return (
-              <div
-                key={index}
-                style={{
-                  backgroundColor: voted ? "#ff0083" : "",
-                  color: "#f2f3f5",
-                  padding: 10,
-                  marginBottom: 10,
-                  borderRadius: 4,
-                  width: `${voted ? opt.percentOfTotal : 100}%`,
-                  whiteSpace: "nowrap",
-                  overflow: "visible",
-                }}
-              >
-                {opt.text}
-              </div>
-            );
-          })}
-        </div>
-      </div>,
+      {
+        type: "div",
+        children: "Hello Jay",
+        props: {},
+        key: "",
+      },
       {
         width: 600,
         height: 400,
@@ -90,6 +55,62 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         ],
       }
     );
+
+    // const svg = await satori(
+    //   <div
+    //     style={{
+    //       justifyContent: "flex-start",
+    //       alignItems: "center",
+    //       display: "flex",
+    //       width: "100%",
+    //       height: "100%",
+    //       backgroundColor: "#f2f3f5",
+    //       padding: 50,
+    //       lineHeight: 1.2,
+    //       fontSize: 24,
+    //     }}
+    //   >
+    //     <div
+    //       style={{
+    //         display: "flex",
+    //         flexDirection: "column",
+    //         padding: 20,
+    //       }}
+    //     >
+    //       {pollData.options.map((opt, index) => {
+    //         return (
+    //           <div
+    //             key={index}
+    //             style={{
+    //               backgroundColor: voted ? "#ff0083" : "",
+    //               color: "#f2f3f5",
+    //               padding: 10,
+    //               marginBottom: 10,
+    //               borderRadius: 4,
+    //               width: `${voted ? opt.percentOfTotal : 100}%`,
+    //               whiteSpace: "nowrap",
+    //               overflow: "visible",
+    //             }}
+    //           >
+    //             {opt.text}
+    //           </div>
+    //         );
+    //       })}
+    //     </div>
+    //   </div>,
+    //   {
+    //     width: 600,
+    //     height: 400,
+    //     fonts: [
+    //       {
+    //         data: fontData,
+    //         name: "Roboto",
+    //         style: "normal",
+    //         weight: 400,
+    //       },
+    //     ],
+    //   }
+    // );
 
     const pngBuffer = await sharp(Buffer.from(svg)).toFormat("png").toBuffer();
     res.setHeader("Content-Type", "image/png");
