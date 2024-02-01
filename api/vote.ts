@@ -2,10 +2,25 @@ import { Message, getSSLHubRpcClient } from "@farcaster/hub-nodejs";
 import { kv } from "@vercel/kv";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { Poll } from "./types";
-import { polls } from "./polls";
 
 const HUB_URL = process.env["HUB_URL"] || "nemes.farcaster.xyz:2283";
 const client = getSSLHubRpcClient(HUB_URL);
+
+const polls: Poll[] = [
+  {
+    id: "1",
+    title: "Score Home Page",
+    option1: "Dissatisfied 🙁",
+    option2: "Neutral 😐",
+    option3: "Satisfied 😃",
+    option4: "Awesome 🤩",
+    votes1: 0,
+    votes2: 0,
+    votes3: 0,
+    votes4: 0,
+    created_at: 0,
+  },
+];
 const latestPoll = polls.slice(-1)[0];
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
