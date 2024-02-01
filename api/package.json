@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "FC Frames Polls",
   "private": true,
-  "type": "module",
   "scripts": {
     "vercel": "vercel",
     "start": "vercel dev",
