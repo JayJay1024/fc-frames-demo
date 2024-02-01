@@ -1,20 +1,22 @@
+import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { kv } from "@vercel/kv";
 import satori from "satori/wasm";
 import { join } from "path";
 import * as fs from "fs";
 import sharp from "sharp";
+import { Poll } from "./types";
 
 const fontPath = join(process.cwd(), "/api/Roboto-Regular.ttf");
 const fontData = fs.readFileSync(fontPath);
 
-export default async function handler(req, res) {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const pollId = req.query["id"];
     if (!pollId) {
       return res.status(400).send("Missing poll ID");
     }
 
-    const poll = await kv.hgetall(`poll:${pollId}`);
+    const poll: Poll | null = await kv.hgetall(`poll:${pollId}`);
     if (!poll) {
       return res.status(400).send(`Missing poll for #${pollId}`);
     }
@@ -89,12 +91,10 @@ export default async function handler(req, res) {
       }
     );
 
-    // const pngBuffer = await sharp(Buffer.from(svg)).toFormat("png").toBuffer();
-    // res.setHeader("Content-Type", "image/png");
-    // res.setHeader("Cache-Control", "max-age=10");
-    // return res.end(pngBuffer);
-
-    return res.end("Jay Test");
+    const pngBuffer = await sharp(Buffer.from(svg)).toFormat("png").toBuffer();
+    res.setHeader("Content-Type", "image/png");
+    res.setHeader("Cache-Control", "max-age=10");
+    return res.end(pngBuffer);
   } catch (err) {
     console.error(err);
     res.statusCode = 500;
