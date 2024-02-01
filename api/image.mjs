@@ -4,7 +4,7 @@ import { join } from "path";
 import * as fs from "fs";
 import sharp from "sharp";
 
-const fontPath = join(process.cwd(), "Roboto-Regular.ttf");
+const fontPath = join(process.cwd(), "/api/Roboto-Regular.ttf");
 const fontData = fs.readFileSync(fontPath);
 
 export default async function handler(req, res) {

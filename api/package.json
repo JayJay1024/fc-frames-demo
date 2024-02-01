@@ -5,11 +5,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "vercel": "vercel",
+    "start": "vercel dev",
+    "deploy": "vercel --prod"
   },
   "devDependencies": {
     "@vercel/kv": "^1.0.1",
-    "@vercel/node": "^3.0.17"
+    "@vercel/node": "^3.0.17",
+    "vercel": "^33.4.1"
   },
   "dependencies": {
     "@farcaster/hub-nodejs": "^0.10.21",
