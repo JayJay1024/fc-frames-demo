@@ -25,7 +25,7 @@ const latestPoll = polls.slice(-1)[0];
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
-    if (!(await kv.hgetall(`poll:${latestPoll.id}`))) {
+    if (!(await kv.hgetall(`poll:${latestPoll.id}`)) || true) {
       const newPoll: Poll = {
         ...latestPoll,
         created_at: Date.now(),
