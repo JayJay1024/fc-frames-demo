@@ -44,6 +44,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             color: "#f0f",
             background: "#0f0",
           },
+          children: "Hello Jay",
         },
         children: "Hello Jay",
       },
