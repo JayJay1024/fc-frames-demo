@@ -180,7 +180,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const pngBuffer = await sharp(Buffer.from(svg)).toFormat("png").toBuffer();
     res.setHeader("Content-Type", "image/png");
     res.setHeader("Cache-Control", "max-age=10");
-    return res.send(pngBuffer);
+    // return res.send(pngBuffer);
+    return res.end(svg);
   } catch (err) {
     console.error(err);
     res.statusCode = 500;
