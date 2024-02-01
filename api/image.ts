@@ -42,6 +42,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         props: {
           style: {
             color: "#f0f",
+            background: "#0f0",
           },
         },
         children: "Hello Jay",
