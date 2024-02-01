@@ -10,12 +10,12 @@
     "deploy": "vercel --prod"
   },
   "devDependencies": {
-    "@vercel/kv": "^1.0.1",
     "@vercel/node": "^3.0.17",
     "vercel": "^33.4.1"
   },
   "dependencies": {
     "@farcaster/hub-nodejs": "^0.10.21",
+    "@vercel/kv": "^1.0.1",
     "satori": "^0.10.13",
     "sharp": "^0.33.2"
   }
