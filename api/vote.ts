@@ -25,7 +25,7 @@ const latestPoll = polls.slice(-1)[0];
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
-    if (!(await kv.hgetall(`poll:${latestPoll.id}`)) || true) {
+    if (!(await kv.hgetall(`poll:${latestPoll.id}`))) {
       const newPoll: Poll = {
         ...latestPoll,
         created_at: Date.now(),
@@ -35,8 +35,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         score: Number(newPoll.created_at),
         member: newPoll.id,
       });
-
-      return res.end(JSON.stringify(newPoll));
     }
   } catch (err) {
     console.error(err);

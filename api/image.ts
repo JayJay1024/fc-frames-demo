@@ -82,8 +82,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         },
       },
       {
-        width: 600,
-        height: 400,
+        width: 500,
+        height: 300,
         fonts: [
           {
             data: fontData,
