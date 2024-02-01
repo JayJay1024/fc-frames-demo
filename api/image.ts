@@ -53,37 +53,32 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           },
           children: {
             type: "div",
-            key: "12",
+            key: "11",
             props: {
               style: {
                 display: "flex",
                 flexDirection: "column",
+                alignItems: "center",
+                width: "max-content",
                 padding: 20,
               },
-              children: [
-                {
-                  type: "h2",
-                  key: "123",
-                  props: { style: { textAlign: "center", color: "#ff0083" }, children: poll.title },
-                },
-                ...pollData.options.map((opt, index) => ({
-                  type: "div",
-                  key: `1234${index}`,
-                  props: {
-                    style: {
-                      backgroundColor: voted ? "#ff0083" : "",
-                      color: "#000",
-                      padding: 10,
-                      marginBottom: 10,
-                      borderRadius: 4,
-                      width: `${voted ? opt.percentOfTotal : 100}%`,
-                      whiteSpace: "nowrap",
-                      overflow: "visible",
-                    },
-                    children: opt.text,
+              children: pollData.options.map((opt, index) => ({
+                type: "div",
+                key: `11${index}`,
+                props: {
+                  style: {
+                    backgroundColor: voted ? "#ff0083" : "",
+                    color: "#000",
+                    padding: 10,
+                    marginBottom: 10,
+                    borderRadius: 4,
+                    width: `${voted ? opt.percentOfTotal : 100}%`,
+                    whiteSpace: "nowrap",
+                    overflow: "visible",
                   },
-                })),
-              ],
+                  children: opt.text,
+                },
+              })),
             },
           },
         },
