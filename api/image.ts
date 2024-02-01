@@ -177,10 +177,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     //   }
     // );
 
-    const pngBuffer = await sharp(svg).toFormat("png").toBuffer();
+    const pngBuffer = await sharp(Buffer.from(svg)).toFormat("png").toBuffer();
     res.setHeader("Content-Type", "image/png");
     res.setHeader("Cache-Control", "max-age=10");
-    return res.end(pngBuffer);
+    return res.send(pngBuffer);
   } catch (err) {
     console.error(err);
     res.statusCode = 500;
