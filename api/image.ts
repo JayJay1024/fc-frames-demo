@@ -46,7 +46,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             display: "flex",
             width: "100%",
             height: "100%",
-            backgroundColor: "#2a2a2a",
+            backgroundColor: "#000000",
             padding: 50,
             lineHeight: 1.2,
             fontSize: 24,
