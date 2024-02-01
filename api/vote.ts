@@ -36,7 +36,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         member: newPoll.id,
       });
 
-      return res.end(newPoll);
+      return res.end(JSON.stringify(newPoll));
     }
   } catch (err) {
     console.error(err);
