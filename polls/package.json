@@ -1,0 +1,12 @@
+{
+  "name": "polls",
+  "version": "1.0.0",
+  "description": "FC Frames Polls",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@vercel/node": "^3.0.17"
+  }
+}
