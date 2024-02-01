@@ -4,7 +4,6 @@ import { Poll } from "./types";
 import satori from "satori/wasm";
 import { join } from "path";
 import * as fs from "fs";
-import React from "react";
 import sharp from "sharp";
 
 const fontPath = join(process.cwd(), "Roboto-Regular.ttf");

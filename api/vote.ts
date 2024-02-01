@@ -2,11 +2,14 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === "POST") {
-    res.statusCode = 200;
-    return res.end("Haha");
+    try {
+      //
+    } catch (err) {
+      console.error(err);
+      return res.status(500).end("Error voting poll");
+    }
   } else {
     res.setHeader("Allow", ["POST"]);
-    res.statusCode = 405;
-    return res.end(`Method ${req.method} Not Allowed`);
+    return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
