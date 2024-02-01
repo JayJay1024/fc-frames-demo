@@ -1,5 +1,5 @@
 import { kv } from "@vercel/kv";
-import satori from "satori/wasm";
+import satori from "satori";
 import { join } from "path";
 import * as fs from "fs";
 import sharp from "sharp";
