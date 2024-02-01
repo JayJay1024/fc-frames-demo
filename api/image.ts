@@ -58,8 +58,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
               style: {
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
-                width: "max-content",
                 padding: 20,
                 border: "1px solid #ff0083",
               },
