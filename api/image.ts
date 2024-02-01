@@ -34,6 +34,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         return { option, votes, text, percentOfTotal };
       }),
     };
+    return res.send(poll);
 
     const svg = await satori(
       {
