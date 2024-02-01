@@ -137,7 +137,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 props: {
                   style: {
                     backgroundColor: voted ? "#ff0083" : "",
-                    color: "#f2f3f5",
+                    color: "#000",
                     padding: 10,
                     marginBottom: 10,
                     borderRadius: 4,
