@@ -49,7 +49,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       },
       {
         width: 600,
-        height: 400,
+        height: 800,
         fonts: [
           {
             data: fontData,
