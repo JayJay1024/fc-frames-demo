@@ -33,66 +33,68 @@ export default async function handler(req, res) {
       }),
     };
 
-    const svg = await satori(
-      <div
-        style={{
-          justifyContent: "flex-start",
-          alignItems: "center",
-          display: "flex",
-          width: "100%",
-          height: "100%",
-          backgroundColor: "#f2f3f5",
-          padding: 50,
-          lineHeight: 1.2,
-          fontSize: 24,
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            padding: 20,
-          }}
-        >
-          {pollData.options.map((opt, index) => {
-            return (
-              <div
-                key={index}
-                style={{
-                  backgroundColor: showResults ? "#ff0083" : "",
-                  color: "#f2f3f5",
-                  padding: 10,
-                  marginBottom: 10,
-                  borderRadius: 4,
-                  width: `${voted ? opt.percentOfTotal : 100}%`,
-                  whiteSpace: "nowrap",
-                  overflow: "visible",
-                }}
-              >
-                {opt.text}
-              </div>
-            );
-          })}
-        </div>
-      </div>,
-      {
-        width: 600,
-        height: 400,
-        fonts: [
-          {
-            data: fontData,
-            name: "Roboto",
-            style: "normal",
-            weight: 400,
-          },
-        ],
-      }
-    );
+    // const svg = await satori(
+    //   <div
+    //     style={{
+    //       justifyContent: "flex-start",
+    //       alignItems: "center",
+    //       display: "flex",
+    //       width: "100%",
+    //       height: "100%",
+    //       backgroundColor: "#f2f3f5",
+    //       padding: 50,
+    //       lineHeight: 1.2,
+    //       fontSize: 24,
+    //     }}
+    //   >
+    //     <div
+    //       style={{
+    //         display: "flex",
+    //         flexDirection: "column",
+    //         padding: 20,
+    //       }}
+    //     >
+    //       {pollData.options.map((opt, index) => {
+    //         return (
+    //           <div
+    //             key={index}
+    //             style={{
+    //               backgroundColor: showResults ? "#ff0083" : "",
+    //               color: "#f2f3f5",
+    //               padding: 10,
+    //               marginBottom: 10,
+    //               borderRadius: 4,
+    //               width: `${voted ? opt.percentOfTotal : 100}%`,
+    //               whiteSpace: "nowrap",
+    //               overflow: "visible",
+    //             }}
+    //           >
+    //             {opt.text}
+    //           </div>
+    //         );
+    //       })}
+    //     </div>
+    //   </div>,
+    //   {
+    //     width: 600,
+    //     height: 400,
+    //     fonts: [
+    //       {
+    //         data: fontData,
+    //         name: "Roboto",
+    //         style: "normal",
+    //         weight: 400,
+    //       },
+    //     ],
+    //   }
+    // );
 
-    const pngBuffer = await sharp(Buffer.from(svg)).toFormat("png").toBuffer();
-    res.setHeader("Content-Type", "image/png");
-    res.setHeader("Cache-Control", "max-age=10");
-    return res.end(pngBuffer);
+    // const pngBuffer = await sharp(Buffer.from(svg)).toFormat("png").toBuffer();
+    // res.setHeader("Content-Type", "image/png");
+    // res.setHeader("Cache-Control", "max-age=10");
+    // return res.end(pngBuffer);
+
+    return res.end("Jay");
   } catch (err) {
     res.statusCode = 500;
     return res.status(500).end("Error generating image");
