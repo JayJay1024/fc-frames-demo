@@ -46,7 +46,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             display: "flex",
             width: "100%",
             height: "100%",
-            backgroundColor: "#2A2A2A",
+            backgroundColor: "#2a2a2a",
             padding: 50,
             lineHeight: 1.2,
             fontSize: 24,
@@ -59,7 +59,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 display: "flex",
                 flexDirection: "column",
                 padding: 20,
-                border: "1px solid #ff0083",
               },
               children: pollData.options.map((opt, index) => ({
                 type: "div",
