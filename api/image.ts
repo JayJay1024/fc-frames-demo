@@ -46,7 +46,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             display: "flex",
             width: "100%",
             height: "100%",
-            backgroundColor: "#f2f3f5",
+            backgroundColor: "#2A2A2A",
             padding: 50,
             lineHeight: 1.2,
             fontSize: 24,
@@ -67,7 +67,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 props: {
                   style: {
                     backgroundColor: voted ? "#ff0083" : "",
-                    color: "#000",
+                    color: "#f2f3f5",
                     padding: 10,
                     marginBottom: 10,
                     borderRadius: 4,
