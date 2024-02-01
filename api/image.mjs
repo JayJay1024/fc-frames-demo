@@ -96,6 +96,7 @@ export default async function handler(req, res) {
 
     return res.end("Jay");
   } catch (err) {
+    console.error(err);
     res.statusCode = 500;
     return res.status(500).end("Error generating image");
   }
