@@ -61,7 +61,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
               <div
                 key={index}
                 style={{
-                  backgroundColor: showResults ? "#ff0083" : "",
+                  backgroundColor: voted ? "#ff0083" : "",
                   color: "#f2f3f5",
                   padding: 10,
                   marginBottom: 10,
