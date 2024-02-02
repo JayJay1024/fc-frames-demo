@@ -63,21 +63,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     try {
       const buttonId = validatedMessage?.data?.frameActionBody?.buttonIndex || 0;
       const fid = validatedMessage?.data?.fid || 0;
-      const voted = req.query["voted"] === "true" || (await kv.sismember(`poll:${latestPoll.id}:voted`, fid));
+      const pollId = latestPoll.id;
+      let voted = !!(await kv.sismember(`poll:${pollId}:voted`, fid));
 
       if (fid > 0 && buttonId > 0 && buttonId < 5 && !voted) {
         const multi = kv.multi();
-        multi.hincrby(`poll:${latestPoll.id}`, `votes${buttonId}`, 1);
-        multi.sadd(`poll:${latestPoll.id}:voted`, fid);
+        multi.hincrby(`poll:${pollId}`, `votes${buttonId}`, 1);
+        multi.sadd(`poll:${pollId}:voted`, fid);
         await multi.exec();
+        voted = true;
       }
 
-      const poll: Poll | null = await kv.hgetall(`poll:${latestPoll.id}`);
+      const poll: Poll | null = await kv.hgetall(`poll:${pollId}`);
       if (!poll) {
-        return res.status(400).send(`Missing poll for #${latestPoll.id}`);
+        return res.status(400).send(`Missing poll for #${pollId}`);
       }
 
-      const imageUrl = `${process.env["HOST"]}/api/image?id=${poll.id}&voted=${
+      const imageUrl = `${process.env["HOST"]}/api/image?id=${poll.id}&results=${
         voted ? "true" : "false"
       }&date=${Date.now()}`;
 
@@ -86,18 +88,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         <!DOCTYPE html>
         <html>
           <head>
-            <title>Vote Recorded</title>
-            <meta property="og:title" content="Vote Recorded">
+            <title>Vote Overview</title>
+            <meta property="og:title" content="Vote Overview">
             <meta property="og:image" content="${imageUrl}">
             <meta name="fc:frame" content="vNext">
             <meta name="fc:frame:image" content="${imageUrl}">
           </head>
           <body>
-            <p>${
-              voted
-                ? `You have already voted. You clicked ${buttonId}`
-                : `Your vote for ${buttonId} has been recorded for fid ${fid}.`
-            }</p>
+            <p>${voted ? `You have already voted. You clicked ${buttonId}.` : `You haven't voted yet.`}</p>
           </body>
         </html>
       `);
