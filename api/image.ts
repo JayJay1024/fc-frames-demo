@@ -82,15 +82,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                   },
                 })),
                 ...(buttonId && pollOptions.at(buttonId)
-                  ? {
-                      type: "div",
-                      key: "12345",
-                      props: {
-                        style: { color: "#f2f3f5", whiteSpace: "nowrap" },
-                        children: `You voted ${pollOptions.at(buttonId)}`,
+                  ? [
+                      {
+                        type: "div",
+                        key: "12345",
+                        props: {
+                          style: { color: "#f2f3f5", whiteSpace: "nowrap" },
+                          children: `You voted ${pollOptions.at(buttonId)}`,
+                        },
                       },
-                    }
-                  : {}),
+                    ]
+                  : []),
               ],
             },
           },
