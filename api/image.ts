@@ -88,7 +88,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         type: "div",
                         key: "12345",
                         props: {
-                          style: { color: "#f2f3f5", whiteSpace: "nowrap", paddingTop: 5 },
+                          style: { color: "#f2f3f5", whiteSpace: "nowrap", paddingTop: 6 },
                           children: `You voted ${pollOptions.at(buttonId - 1)}!`,
                         },
                       },
