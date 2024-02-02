@@ -46,7 +46,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             display: "flex",
             width: "100%",
             height: "100%",
-            backgroundColor: "#fff",
+            backgroundColor: "#000000",
             padding: 50,
             lineHeight: 1.2,
             fontSize: 24,
@@ -94,6 +94,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         ],
         graphemeImages: {
           "🤩": "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f92f.svg",
+          "Terrible": "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f92f.svg",
         },
       }
     );
