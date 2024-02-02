@@ -24,7 +24,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const showResults = req.query["results"] === "true";
     const fid = req.query["fid"];
     const buttonId = fid ? parseInt((await kv.get<string | null>(`poll:${pollId}:voted:${fid}`)) || "0") : 0;
-    console.log(`fid: ${fid}, buttonId: ${buttonId}.`);
 
     const pollOptions = [poll.option1, poll.option2, poll.option3, poll.option4].filter((option) => option !== "");
     const totalVotes = pollOptions.map((_, index) => parseInt(poll[`votes${index + 1}`])).reduce((a, b) => a + b, 0);

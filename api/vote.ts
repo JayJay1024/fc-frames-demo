@@ -26,9 +26,7 @@ const latestPoll = polls.slice(-1)[0];
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
-    console.log("check poll exist.");
     if (!(await kv.hgetall(`poll:${latestPoll.id}`))) {
-      console.log("poll not exist, going to create...");
       const newPoll: Poll = {
         ...latestPoll,
         created_at: Date.now(),
@@ -56,7 +54,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const urlBuffer = validatedMessage?.data?.frameActionBody?.url || [];
       const urlString = Buffer.from(urlBuffer).toString("utf-8");
       if (!urlString.startsWith(HOST_URL)) {
-        console.warn(`Invalid frame url: ${urlBuffer}`);
         return res.status(400).end(`Invalid frame url: ${urlBuffer}`);
       }
     } catch (err) {
@@ -70,8 +67,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const pollId = latestPoll.id;
       let voted = !!(await kv.sismember(`poll:${pollId}:voted`, fid));
 
-      console.log(`fid: ${fid}, button idx: ${buttonId}, voted: ${voted}`);
-
       if (fid > 0 && buttonId > 0 && buttonId < 5 && !voted) {
         const multi = kv.multi();
         multi.hincrby(`poll:${pollId}`, `votes${buttonId}`, 1);
@@ -79,15 +74,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         multi.sadd(`poll:${pollId}:voted`, fid);
         await multi.exec();
         voted = true;
-        console.log(`voted`);
       }
 
       const poll: Poll | null = await kv.hgetall(`poll:${pollId}`);
       if (!poll) {
-        console.warn(`Missing poll for #${pollId}`);
         return res.status(400).send(`Missing poll for #${pollId}`);
       }
-      console.log(`poll: ${JSON.stringify(poll)}`);
 
       const imageUrl = `${HOST_URL}/api/image?id=${poll.id}&results=${voted ? "true" : "false"}&date=${Date.now()}${
         fid > 0 ? `&fid=${fid}` : ""
