@@ -26,7 +26,7 @@ const latestPoll = polls.slice(-1)[0];
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
-    console.log('check poll exist');
+    console.log('check poll exist.');
     if (!(await kv.hgetall(`poll:${latestPoll.id}`))) {
       console.log('poll not exist, going to create...');
       const newPoll: Poll = {
