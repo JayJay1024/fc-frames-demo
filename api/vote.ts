@@ -53,6 +53,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const urlBuffer = validatedMessage?.data?.frameActionBody?.url || [];
       const urlString = Buffer.from(urlBuffer).toString("utf-8");
       if (!urlString.startsWith(process.env["HOST"] || "")) {
+        console.error(`Invalid frame url: ${urlBuffer}`);
         return res.status(400).end(`Invalid frame url: ${urlBuffer}`);
       }
     } catch (err) {
