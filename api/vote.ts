@@ -10,8 +10,8 @@ const polls: Poll[] = [
   {
     id: "1",
     title: "Score Home Page",
-    option1: "Dissatisfied",
-    option2: "Neutral",
+    option1: "Terrible",
+    option2: "Dissatisfied",
     option3: "Satisfied",
     option4: "Awesome",
     votes1: 0,

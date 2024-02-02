@@ -21,16 +21,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).send(`Missing poll for #${pollId}`);
     }
 
-    const voted = req.query["voted"] === "true";
+    const showResults = req.query["results"] === "true";
 
     const pollOptions = [poll.option1, poll.option2, poll.option3, poll.option4].filter((option) => option !== "");
     const totalVotes = pollOptions.map((_, index) => parseInt(poll[`votes${index + 1}`])).reduce((a, b) => a + b, 0);
     const pollData = {
-      question: voted ? `Results for ${poll.title}` : poll.title,
+      question: showResults ? `Results for ${poll.title}` : poll.title,
       options: pollOptions.map((option, index) => {
         const votes = poll[`votes${index + 1}`];
         const percentOfTotal = totalVotes ? Math.round((votes / totalVotes) * 100) : 0;
-        const text = voted ? `${percentOfTotal}%: ${option} (${votes} votes)` : `${index + 1}. ${option}`;
+        const text = showResults ? `${percentOfTotal}%: ${option} (${votes} votes)` : `${index + 1}. ${option}`;
         return { option, votes, text, percentOfTotal };
       }),
     };
@@ -65,12 +65,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 key: `11${index}`,
                 props: {
                   style: {
-                    backgroundColor: voted ? "#ff0083" : "",
+                    backgroundColor: showResults ? "#ff0083" : "",
                     color: "#f2f3f5",
                     padding: 10,
                     marginBottom: 10,
                     borderRadius: 4,
-                    width: `${voted ? opt.percentOfTotal : 100}%`,
+                    width: `${showResults ? opt.percentOfTotal : 100}%`,
                     whiteSpace: "nowrap",
                     overflow: "visible",
                   },
