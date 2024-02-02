@@ -26,7 +26,7 @@ const latestPoll = polls.slice(-1)[0];
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
-    if (!(await kv.hgetall(`poll:${latestPoll.id}`)) || true) {
+    if (!(await kv.hgetall(`poll:${latestPoll.id}`))) {
       const newPoll: Poll = {
         ...latestPoll,
         created_at: Date.now(),
@@ -36,7 +36,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         score: Number(newPoll.created_at),
         member: newPoll.id,
       });
-      return res.end(`Jay Jay: ${process.env["HOST"]} End`);
     }
   } catch (err) {
     console.error(err);
@@ -55,7 +54,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const urlBuffer = validatedMessage?.data?.frameActionBody?.url || [];
       const urlString = Buffer.from(urlBuffer).toString("utf-8");
       if (!urlString.startsWith(HOST_URL)) {
-        console.error(`Invalid frame url: ${urlBuffer}`);
+        console.warn(`Invalid frame url: ${urlBuffer}`);
         return res.status(400).end(`Invalid frame url: ${urlBuffer}`);
       }
     } catch (err) {
