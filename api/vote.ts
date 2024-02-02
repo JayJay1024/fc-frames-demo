@@ -14,7 +14,7 @@ const polls: Poll[] = [
     option1: "Terrible",
     option2: "Dissatisfied",
     option3: "Satisfied",
-    option4: "Awesome 🤩",
+    option4: "Awesome",
     votes1: 0,
     votes2: 0,
     votes3: 0,
