@@ -50,6 +50,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             padding: 50,
             lineHeight: 1.2,
             fontSize: 24,
+            borderRadius: 10,
           },
           children: {
             type: "div",
@@ -69,7 +70,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                     color: "#f2f3f5",
                     padding: 10,
                     marginBottom: 10,
-                    borderRadius: 4,
+                    borderRadius: '4px 10px 10px 4px',
                     width: `${showResults ? opt.percentOfTotal : 100}%`,
                     whiteSpace: "nowrap",
                     overflow: "visible",
