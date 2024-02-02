@@ -20,7 +20,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (!poll) {
       return res.status(400).send(`Missing poll for #${pollId}`);
     }
-    return res.send(JSON.stringify(poll));
 
     const showResults = req.query["results"] === "true";
 
