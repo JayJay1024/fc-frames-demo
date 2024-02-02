@@ -13,7 +13,7 @@ const polls: Poll[] = [
     option1: "Terrible",
     option2: "Dissatisfied",
     option3: "Satisfied",
-    option4: "Awesome",
+    option4: "Awesome 🤩",
     votes1: 0,
     votes2: 0,
     votes3: 0,
@@ -25,7 +25,7 @@ const latestPoll = polls.slice(-1)[0];
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
-    if (!(await kv.hgetall(`poll:${latestPoll.id}`))) {
+    if (!(await kv.hgetall(`poll:${latestPoll.id}`)) || true) {
       const newPoll: Poll = {
         ...latestPoll,
         created_at: Date.now(),
@@ -35,6 +35,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         score: Number(newPoll.created_at),
         member: newPoll.id,
       });
+      return res.end(`Jay Jay: ${process.env["HOST"]} End`);
     }
   } catch (err) {
     console.error(err);
