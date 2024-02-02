@@ -75,6 +75,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         await multi.exec();
         voted = true;
       }
+      console.error(`${fid}, ${buttonId}, ${voted}`);
 
       const poll: Poll | null = await kv.hgetall(`poll:${pollId}`);
       if (!poll) {
