@@ -22,6 +22,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const showResults = req.query["results"] === "true";
+    const fid = req.query["fid"];
+    const buttonId = fid ? parseInt((await kv.get<string | null>(`poll:${pollId}:voted:${fid}`)) || "0") : 0;
 
     const pollOptions = [poll.option1, poll.option2, poll.option3, poll.option4].filter((option) => option !== "");
     const totalVotes = pollOptions.map((_, index) => parseInt(poll[`votes${index + 1}`])).reduce((a, b) => a + b, 0);
@@ -54,30 +56,42 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           },
           children: {
             type: "div",
-            key: "11",
+            key: "12",
             props: {
               style: {
                 display: "flex",
                 flexDirection: "column",
                 padding: 20,
               },
-              children: pollData.options.map((opt, index) => ({
-                type: "div",
-                key: `11${index}`,
-                props: {
-                  style: {
-                    backgroundColor: showResults ? "#ff0083" : "",
-                    color: "#f2f3f5",
-                    padding: 10,
-                    marginBottom: 10,
-                    borderRadius: '4px 10px 10px 4px',
-                    width: `${showResults ? opt.percentOfTotal : 100}%`,
-                    whiteSpace: "nowrap",
-                    overflow: "visible",
+              children: [
+                ...pollData.options.map((opt, index) => ({
+                  type: "div",
+                  key: `123${index}`,
+                  props: {
+                    style: {
+                      backgroundColor: showResults ? "#ff0083" : "",
+                      color: "#f2f3f5",
+                      padding: 10,
+                      marginBottom: 10,
+                      borderRadius: "4px 20px 20px 4px",
+                      width: `${showResults ? opt.percentOfTotal : 100}%`,
+                      whiteSpace: "nowrap",
+                      overflow: "visible",
+                    },
+                    children: opt.text,
                   },
-                  children: opt.text,
-                },
-              })),
+                })),
+                ...(buttonId && pollOptions.at(buttonId)
+                  ? {
+                      type: "div",
+                      key: "12345",
+                      props: {
+                        style: { color: "#f2f3f5", whiteSpace: "nowrap" },
+                        children: `You voted ${pollOptions.at(buttonId)}`,
+                      },
+                    }
+                  : {}),
+              ],
             },
           },
         },

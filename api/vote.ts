@@ -26,9 +26,9 @@ const latestPoll = polls.slice(-1)[0];
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
-    console.log('check poll exist.');
+    console.log("check poll exist.");
     if (!(await kv.hgetall(`poll:${latestPoll.id}`))) {
-      console.log('poll not exist, going to create...');
+      console.log("poll not exist, going to create...");
       const newPoll: Poll = {
         ...latestPoll,
         created_at: Date.now(),
@@ -75,6 +75,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       if (fid > 0 && buttonId > 0 && buttonId < 5 && !voted) {
         const multi = kv.multi();
         multi.hincrby(`poll:${pollId}`, `votes${buttonId}`, 1);
+        multi.set(`poll:${pollId}:voted:${fid}`, buttonId);
         multi.sadd(`poll:${pollId}:voted`, fid);
         await multi.exec();
         voted = true;
@@ -88,9 +89,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }
       console.log(`poll: ${JSON.stringify(poll)}`);
 
-      const imageUrl = `${HOST_URL}/api/image?id=${poll.id}&results=${
-        voted ? "true" : "false"
-      }&date=${Date.now()}`;
+      const imageUrl = `${HOST_URL}/api/image?id=${poll.id}&results=${voted ? "true" : "false"}&date=${Date.now()}${
+        fid > 0 ? `&fid=${fid}` : ""
+      }`;
 
       res.setHeader("Content-Type", "text/html");
       res.status(200).end(`
