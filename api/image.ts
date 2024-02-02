@@ -14,7 +14,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const pollId = req.query["id"];
     if (!pollId) {
-      return res.status(400).send("Missing poll ID 2");
+      return res.status(400).send("Missing poll ID");
     }
 
     const poll: Poll | null = await kv.hgetall(`poll:${pollId}`);
