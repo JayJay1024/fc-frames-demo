@@ -92,10 +92,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             weight: 400,
           },
         ],
-        graphemeImages: {
-          "🤩": "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f92f.svg",
-          "Terrible": "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f92f.svg",
-        },
       }
     );
 
