@@ -74,7 +74,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                       color: "#f2f3f5",
                       padding: 10,
                       marginBottom: 10,
-                      borderRadius: "4px 20px 20px 4px",
+                      borderRadius: 4,
                       width: `${showResults ? opt.percentOfTotal : 100}%`,
                       whiteSpace: "nowrap",
                       overflow: "visible",
@@ -82,14 +82,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                     children: opt.text,
                   },
                 })),
-                ...(buttonId && pollOptions.at(buttonId)
+                ...(buttonId && pollOptions.at(buttonId - 1)
                   ? [
                       {
                         type: "div",
                         key: "12345",
                         props: {
-                          style: { color: "#f2f3f5", whiteSpace: "nowrap" },
-                          children: `You voted ${pollOptions.at(buttonId)}`,
+                          style: { color: "#f2f3f5", whiteSpace: "nowrap", paddingTop: 5 },
+                          children: `You voted ${pollOptions.at(buttonId - 1)}!`,
                         },
                       },
                     ]
